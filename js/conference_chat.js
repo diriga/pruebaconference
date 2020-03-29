@@ -163,8 +163,6 @@ $(function() {
 
             var createStreamOptions = {};
 
-            debugger;
-
             var alta = (new URL(location.href)).searchParams.get('alta');
 
             if( Number(alta) == 0 ) {
@@ -184,8 +182,8 @@ $(function() {
                     audio: true,
                     // video: true
                     video: {
-                        width: { exact: 1920 },
-                        height: {exact: 1080 }
+                        width: { exact: 1280 },
+                        height: {exact: 720 }
                     }
                 };
 
