@@ -12,4 +12,8 @@ $(function() {
     $('#btnUnirseWebAlta').click(function(e) {
         location.href = 'webconference.html?roomId=' + encodeURI("roomparamedicshaman") + '&chatId=' + encodeURI("chatparamedicshaman") + '&alta=' + encodeURI("1");
     });
+
+    $('#btnUnirseWebNormal').click(function(e) {
+        location.href = 'webconference.html?roomId=' + encodeURI("roomparamedicshaman") + '&chatId=' + encodeURI("chatparamedicshaman") + '&alta=' + encodeURI("3");
+    });
 });

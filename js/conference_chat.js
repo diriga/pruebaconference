@@ -176,7 +176,15 @@ $(function() {
                     }
                 };
 
-            }else{
+            }else if( Number(alta) == 3 ){
+                
+                createStreamOptions.constraints = {
+                    audio: true,
+                    video: true
+                };
+
+            }
+            else{
                 
                 createStreamOptions.constraints = {
                     audio: true,
