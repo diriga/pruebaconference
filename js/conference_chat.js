@@ -239,12 +239,12 @@ $(function() {
                         });
 
                 }).catch(function(err) {
+                    $("#containerVideoPermission").show();
+                    // if (error.name == 'NotAllowedError') {
+                    //     $("#containerVideoPermission").show();
+                    // }
                     
-                    if (error.name == 'NotAllowedError') {
-                        $("#containerVideoPermission").show();
-                    }
-                    
-                    console.error('create stream error', err);
+                    // console.error('create stream error', err);
                     
 
                 });
