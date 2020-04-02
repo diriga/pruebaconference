@@ -19,6 +19,7 @@
         <small id="title" style="color: #6c757d;position: absolute;z-index: 2;"><i class="fa fa-video-camera"></i></small>
         <i id="loading" class="fa fa-spinner fa-spin"></i>
         <small id="aviso" style="color: white;position: absolute;z-index: 4;margin-top: 140px;left: 45%;display: none;">Comunicación finalizada</small>
+        <small id="avisoMuteVideo" style="bottom: 45px;position: absolute;right: 87px;z-index: 3;color: #a7a7a7;font-size: 35px;display: none;"><i class="fa fa-ban"></i></small>
         <div id="conference">
             <div id="remote-container"></div>
             <div id="local-container"></div>
@@ -26,12 +27,16 @@
     </div>
     <div class="footer-div">
         <button id="btnStopConference" class="btn btn-lg btn-outline-info m-4 rounded-circle"><i class="fa fa-stop"></i></button>
-        <!-- <button id="btnStopVideo" class="btn btn-lg btn-outline-info m-4 rounded-circle"><i class="fa fa-video-camera"></i></button>
-        <button id="btnResolution" class="btn btn-lg btn-outline-info m-4 rounded-circle"><i class="fa fa-vimeo"></i></button> -->
-        <button id="btnOpenChat" class="btn btn-lg btn-outline-info rounded-circle">
-            <i class="fa fa-comment"></i>
-        </button>
+        <button id="btnOpenChat" class="btn btn-lg btn-outline-info rounded-circle"><i class="fa fa-comment"></i></button>
         <span id="badgeAviso" class="badge badge-danger" style="margin-left: -15px;margin-top: 25px;position: absolute;display: none;">+1</span>
+        <button id="btnMuteVideo" class="btn btn-lg btn-outline-info m-2 rounded-circle">
+            <i class="fa fa-video-camera"></i>
+            <i class="fa fa-ban" style="position: absolute;top: 30px;font-size: 17px;"></i>
+        </button>
+        <button id="btnUnMuteVideo" style="display: none;" class="btn btn-lg btn-outline-info m-2 rounded-circle">
+            <i class="fa fa-video-camera"></i>
+            <i class="fa fa-play-circle-o" style="position: absolute;top: 30px;font-size: 17px;"></i>
+        </button>
     </div>
 
     <div id="divChatWeb">
@@ -67,6 +72,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cloud.apizee.com/apiRTC/apiRTC-latest.min.js"></script>
     <!-- <script type="text/javascript" src="js/chat.js"></script> -->
+    <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/conference_chat.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

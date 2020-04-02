@@ -20,6 +20,7 @@
         <div id="conference">
             <img id="loading" />
             <small id="aviso" style="color: white;position: absolute;z-index: 4;margin-top: 140px;left: 45%;display:none;">Comunicación finalizada</small>
+            <small id="avisoMuteVideo" style="bottom: 20px;position: absolute;right: 40px;z-index: 3;color: #a7a7a7;font-size: 35px;display: none;"><i class="fa fa-ban"></i></small>
             <div id="remote-container"></div>
             <div id="local-container"></div>
         </div>
@@ -27,6 +28,15 @@
             <small id="title" style="color: #6c757d;position: absolute;z-index: 2;"><i class="fa fa-video-camera"></i></small>
             <h5 id="aviso" style="color: white;position: absolute;z-index: 4;margin-top: 140px;margin-left: 25px;margin-right: 25px;">
                 <i class="fa fa-check-circle" style="font-size: 25px;"></i><br><br> Su consulta ha sido finalizada, por favor cierre el navegador, y regrese a la app para calificar la atención recibida.</h5>
+        </div>
+        <div id="containerVideoPermission" style="display:none;top: 0;height: 100%;width: 100%;position: absolute;background-color: black;z-index: 5;">
+            <small id="title" style="color: #6c757d;position: absolute;z-index: 2;"><i class="fa fa-video-camera"></i></small>
+            <h5 id="aviso" style="color: white;position: absolute;z-index: 4;margin-top: 140px;margin-left: 25px;margin-right: 25px;">
+                Debe permitir el acceso a la cámara.
+                <br>
+                <br>
+                <button id="btnPermissionVideo" class="btn btn-info">Solicitar permiso</button>
+            </h5>
         </div>
     </div>
     <div id="divNombreDoctor" class="col-md-12 p-2 text-center" style="color:#b3d7ff !important;display: none;">
@@ -36,6 +46,14 @@
         <button id="btnStopConference" class="btn btn-lg btn-outline-info m-4 rounded-circle"><i class="fa fa-stop"></i></button>
         <button id="btnOpenChat" class="btn btn-lg btn-outline-info rounded-circle"><i class="fa fa-comment"></i></button>
         <span id="badgeAviso" class="badge badge-danger" style="margin-left: -15px;margin-top: 25px;position: absolute;display: none;">+1</span>
+        <button id="btnMuteVideo" class="btn btn-lg btn-outline-info m-2 rounded-circle">
+            <i class="fa fa-video-camera"></i>
+            <i class="fa fa-ban" style="position: absolute;top: 30px;font-size: 17px;"></i>
+        </button>
+        <button id="btnUnMuteVideo" style="display: none;" class="btn btn-lg btn-outline-info m-2 rounded-circle">
+            <i class="fa fa-video-camera"></i>
+            <i class="fa fa-play-circle-o" style="position: absolute;top: 30px;font-size: 17px;"></i>
+        </button>
     </div>
 
     <div id="divChatMobile">
@@ -72,6 +90,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cloud.apizee.com/apiRTC/apiRTC-latest.min.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/conference_chat.js"></script>
 </body>
 

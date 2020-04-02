@@ -5,10 +5,9 @@ var connectedConversation = null;
 // var activeConversation = null;
 var localStream = null; 
 var remoteStreamId = null; 
-//var AIDShamanAPIUrl = "https://telmed.paramedicapps.com.ar/api/";
-//url: "http://paramedicapps.com.ar:9876/Login/GetDoctorViewModelFromConference/" + sConferenceId,
-//url: "https://telmed.paramedicapps.com.ar/api/Login/GetDoctorViewModelFromConference/" + sConferenceId,
-//var AIDShamanAPIUrl = "http://localhost:50368/";
+
+
+
 
 
 $(function() {
@@ -163,41 +162,33 @@ $(function() {
 
             var createStreamOptions = {};
 
-            var alta = (new URL(location.href)).searchParams.get('alta');
+            
+            var esAndroid = (new URL(location.href)).searchParams.get('android');
+            var videoResolutionActive;
+            var videoResolution;
 
-            if( Number(alta) == 0 ) {
+            if (esAndroid) {
+                videoResolutionActive = window.videoResolutionActiveMobile;
+                videoResolution = window.videoResolutionMobile;
+            } else {
+                videoResolutionActive = window.videoResolutionActiveWeb;
+                videoResolution = window.videoResolutionWeb;
+            }
+
+            if( videoResolutionActive ) {
 
                 createStreamOptions.constraints = {
                     audio: true,
-                    // video: true
-                    video: {
-                        width: { exact: 320 },
-                        height: {exact: 240}
-                    }
+                    video: videoResolution
                 };
 
-            }else if( Number(alta) == 3 ){
-                
+            }else{
                 createStreamOptions.constraints = {
                     audio: true,
                     video: true
                 };
 
             }
-            else{
-                
-                createStreamOptions.constraints = {
-                    audio: true,
-                    // video: true
-                    video: {
-                        width: { exact: 1280 },
-                        height: {exact: 720 }
-                    }
-                };
-
-            }
-
-            
 
             ua.createStream(createStreamOptions)
                 .then(function(stream) {
@@ -248,7 +239,14 @@ $(function() {
                         });
 
                 }).catch(function(err) {
+                    
+                    if (error.name == 'NotAllowedError') {
+                        $("#containerVideoPermission").show();
+                    }
+                    
                     console.error('create stream error', err);
+                    
+
                 });
         });
     }
@@ -261,9 +259,8 @@ $(function() {
         var roomId = (new URL(location.href)).searchParams.get('roomId');
         var salaGif = (new URL(location.href)).searchParams.get('sala');
         var esAndroid = (new URL(location.href)).searchParams.get('android');
-
         var roomHist = localStorage.getItem('roomId');
-
+        
         //Si es android podrá salir haciendo atras o el botón de arriba "Volver a la app"
         /*if(esAndroid){
             $("#btnStopConference").hide();
@@ -337,8 +334,50 @@ $(function() {
         stopConference();
     });
 
-    $('#btnStopVideo').click(function(e) {
+    $('#btnPermissionVideo').click(function(e) {
+        var esAndroid = (new URL(location.href)).searchParams.get('android');
+        var videoResolutionActive;
+        var videoResolution;
+        var constraints;
+
+        if (esAndroid) {
+            videoResolutionActive = window.videoResolutionActiveMobile;
+            videoResolution = window.videoResolutionMobile;
+        } else {
+            videoResolutionActive = window.videoResolutionActiveWeb;
+            videoResolution = window.videoResolutionWeb;
+        }
+
+        if( videoResolutionActive ) {
+
+            constraints = {
+                    audio: true,
+                    video: videoResolution
+            };
+
+        }else{
+            constraints = {
+                audio: true,
+                video: true
+            };
+        }
+
+        navigator.mediaDevices.getUserMedia(constraints);
+        $("#containerVideoPermission").hide();
+    });
+
+    $('#btnMuteVideo').click(function(e) {
         localStream.muteVideo();
+        $(this).hide();
+        $('#btnUnMuteVideo').show();
+        $('#avisoMuteVideo').show();
+    });
+
+    $('#btnUnMuteVideo').click(function(e) {
+        localStream.unmuteVideo();
+        $(this).hide();
+        $('#btnMuteVideo').show();
+        $('#avisoMuteVideo').hide();
     });
 
     $('#btnResolution').click(function(e) {
@@ -378,7 +417,7 @@ $(function() {
 
                     $.ajax({
                         data: JSON.stringify({ conferenceId: sConferenceId, cancelMessage: "" }),
-                        url: AIDShamanAPIUrl + "Conference/CancelMobile",
+                        url: window.AIDShamanAPIUrl + "Conference/CancelMobile",
                         // data: JSON.stringify({ conferenceId: 599, cancelMessage: "" }),
                         // url: "http://localhost:50368/Conference/CancelMobile",
                         type: 'POST',
@@ -397,7 +436,7 @@ $(function() {
                     // data.append('conferenceId', sConferenceId);
 
                     // $.ajax({
-                    //     url: AIDShamanAPIUrl + "Conference/SendConferenceRecordedFile",
+                    //     url: window.AIDShamanAPIUrl + "Conference/SendConferenceRecordedFile",
                     //     type: 'POST',
                     //     data: data,
                     //     contentType: false,
@@ -429,17 +468,6 @@ $(function() {
         if (document.getElementById('divLoadingWeb')) {
             location.href = "videoconferencefinish.html";
         }
-    }
-
-
-    window.resolutionVideo = function() {
-
-       
-        debugger;
-       var video = document.getElementById('remote-media-' + remoteStreamId);
-       video.setAttribute('height', '300');
-        video.setAttribute('width', '700');
-       
     }
 
     function createDownloadLink(fileUrl, fileName, emitter) {
@@ -622,7 +650,7 @@ $(function() {
         var sConferenceId = (new URL(location.href)).searchParams.get('roomId').split('room')[1];
 
         $.ajax({
-            url: AIDShamanAPIUrl + "Login/GetDoctorViewModelFromConference/" + sConferenceId,
+            url: window.AIDShamanAPIUrl + "Login/GetDoctorViewModelFromConference/" + sConferenceId,
             success: function(respuesta) {
                 $("#divNombreDoctor").show();
                 $("#spanDoctor").text(" " + respuesta.Name + " (" + respuesta.Enrollment + ") ");
