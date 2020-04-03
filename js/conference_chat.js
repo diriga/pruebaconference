@@ -239,7 +239,10 @@ $(function() {
                         });
 
                 }).catch(function(err) {
+                    
                     $("#containerVideoPermission").show();
+                    
+                    
                     // if (error.name == 'NotAllowedError') {
                     //     $("#containerVideoPermission").show();
                     // }
@@ -260,7 +263,7 @@ $(function() {
         var salaGif = (new URL(location.href)).searchParams.get('sala');
         var esAndroid = (new URL(location.href)).searchParams.get('android');
         var roomHist = localStorage.getItem('roomId');
-        
+        $("#containerVideoPermission").hide();
         //Si es android podrá salir haciendo atras o el botón de arriba "Volver a la app"
         /*if(esAndroid){
             $("#btnStopConference").hide();
